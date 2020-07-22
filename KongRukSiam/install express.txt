@@ -1,0 +1,10 @@
+npm install -g express-generator
+
+express --view=ejs NodeBasic
+
+------------------------------------
+cd NodeBasic
+
+npm install
+
+npm start
