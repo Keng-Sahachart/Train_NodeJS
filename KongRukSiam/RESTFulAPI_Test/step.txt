@@ -1,0 +1,9 @@
+mkdir RESTFulAPI_Test
+cd RESTFulAPI_Test
+npm init -y
+
+npm install express --save
+
+create db.json
+
+npm install body-parser --save
