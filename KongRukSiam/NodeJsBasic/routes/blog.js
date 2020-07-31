@@ -1,8 +1,13 @@
 var express = require('express');
 var router = express.Router();
 
-// import express validator
-const { check, validationResult } = require('express-validator');
+const { check, validationResult } = require('express-validator'); // import express validator
+
+
+// import monk 
+const monk = require('monk')
+const url = 'localhost:27017/TutorialDB';
+const db = monk(url);
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
@@ -26,15 +31,27 @@ router.post('/add', [
     // console.log(req.body.description);
     // console.log(req.body.arthor);
     const result = validationResult(req);
-    var  errors = result.errors;
+    var errors = result.errors;
     if (!result.isEmpty()) {
 
         console.log(result);
-        console.log({errors:errors});
-       res.render("blog_form",{errors:errors})
+        console.log({ errors: errors });
+        res.render("blog_form", { errors: errors })
         //return res.status(400).json({ errors: errors.array() });
     } else {
-
+        var ct = db.get('blogs');
+        ct.insert({
+            name: req.body.name,
+            description: req.body.description,
+            arthor: req.body.arthor
+        }, function (err, blog) {
+            if (err) {
+                res.send(err);
+            } else {
+                res.location("/blog/add");
+                res.redirect("/blog/add");
+            }
+        });
     }
 
 });

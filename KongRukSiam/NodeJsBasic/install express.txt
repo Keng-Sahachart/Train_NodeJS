@@ -14,3 +14,9 @@ cd NodeBasic
 npm install   ติดตั้ง  package ที่ระบุ ในไฟล์  package.json
 
 npm start
+
+----------------------------------
+
+npm install --save express-validator
+
+npm install --save monk
