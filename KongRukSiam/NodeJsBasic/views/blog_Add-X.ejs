@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <%- include layout %>
+    <div class="container">
+        <h2 align="center">เขียนบทความ</h2>
+        <!-- <a href="/blog/add">เพิ่มบทความ</a> -->
+
+        <!-- form blog -->
+        <form action="/blog/add" method="post">
+            <h2>หัวข้อ</h2>
+            <input name="name" type="text" class="form-control">
+
+            <h2>ข้อความ</h2>
+            <textarea name="description" id="" cols="80" rows="10" class="form-control"></textarea>
+
+            <h2>arthur</h2>
+            <input name="arthur" type="text"  class="form-control">
+
+        <!-- <button type="submit" class="btn btn-primary form-control">Post Blog</button> -->
+         </form>
+    </div>
+</body>
+
+</html>

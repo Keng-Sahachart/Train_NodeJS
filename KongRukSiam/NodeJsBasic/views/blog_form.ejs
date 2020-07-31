@@ -5,21 +5,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        
     <script src="https://cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
 </head>
 
 <body>
-    <%- include layout %>
+    <% include layout %>
     <div class="container">
         <h2 align="center">เขียนบทความ</h2>
         <a href="/blog/add">เพิ่มบทความ</a>
         <!-- form blog -->
-        <form action="">
+        <% if(locals.errors) { %>
+        <ul class="alert alert-danger">
+            <% Object.values(errors).forEach(function(error){ %>
+            <li><%= error.msg  %> </li>
+            <% }) %>
+        </ul>
+        <% } %>
+        <form action="/blog/add" method="POST">
             <div class="form-group">
                 <label for="">ชื่อบทความ</label>
-                <input type="text" class="form-control">
+                <input name="name" type="text" class="form-control">
             </div>
             <div class="form-group">
                 <label for="">รายละเอียด</label>
@@ -30,8 +39,8 @@
                 <label for="">ผู้แต่ง</label>
                 <input type="text" name="arthor" class="form-control">
             </div>
-            <button type="submit" class="btn btn-primary">บันทึก</button>
-            <input type="text" type="submit" value="บันทึก" class="btn btn-primary">
+            <!-- <button type="submit" class="btn btn-primary">บันทึก</button> -->
+            <input type="submit" value="บันทึก" class="btn btn-primary">
         </form>
     </div>
     <script>
