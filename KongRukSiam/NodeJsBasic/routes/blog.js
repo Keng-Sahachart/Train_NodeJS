@@ -39,8 +39,8 @@ router.post('/add', [
         res.render("blog_form", { errors: errors })
         //return res.status(400).json({ errors: errors.array() });
     } else {
-        var ct = db.get('blogs');
-        ct.insert({
+        var collection = db.get('blogs');
+        collection.insert({
             name: req.body.name,
             description: req.body.description,
             arthor: req.body.arthor
@@ -48,6 +48,7 @@ router.post('/add', [
             if (err) {
                 res.send(err);
             } else {
+                // req.flash("error", "บันทึก เรียบร้อยแล้ว");
                 res.location("/blog/add");
                 res.redirect("/blog/add");
             }
