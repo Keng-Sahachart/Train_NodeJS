@@ -9,7 +9,7 @@ var usersRouter = require('./routes/users');
 var blogRouter = require('./routes/blog');
 
 var app = express();
-// var session = require('express-session') // import sesstion
+var session = require('express-session') // import sesstion สำหรับใช้ ร่วมกับ  express-messages
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -22,13 +22,16 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // 
-// app.use(session({
-//   secret: 'keyboard cat',
-//   resave: false,
-//   saveUninitialized: true
-// }))
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true
+  // ,cookie: { secure: true }
+}))
 
-// import express message
+/*import express message
+เอาไว้แสดงผล เป็น message
+*/
 app.use(require('connect-flash')());
 app.use(function (req, res, next) {
   res.locals.messages = require('express-messages')(req, res);

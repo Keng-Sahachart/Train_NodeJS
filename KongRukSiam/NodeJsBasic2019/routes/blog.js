@@ -48,7 +48,11 @@ router.post('/add', [
             if (err) {
                 res.send(err);
             } else {
-                // req.flash("error", "บันทึก เรียบร้อยแล้ว");
+                req.flash("info", "บันทึก เรียบร้อยแล้ว");  
+                req.flash("error", "TEst class error");  
+                /* สั่งให้ messages() แสดงผล ข้อความ class error และ ข้อความตามนี้ แต่จะใช้ session ในการส่งไปด้วย
+                    สามารถสั่งให้ แสดงได้หลาย ข้อความ
+                */
                 res.location("/blog/add");
                 res.redirect("/blog/add");
             }
