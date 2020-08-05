@@ -1,0 +1,36 @@
+ติดตั้ง node.js
+ติดตั้ง mongoDB
+ติดตั้ง mongoDB Compass
+edit path ใน environment variable -> system variable -> path -> new -> C:\Program Files\MongoDB\Server\4.2\bin
+
+เปิด cmd 
+npm install -g express-generator
+
+express --view=ejs NodeBasic
+
+------------------------------------
+cd NodeBasic
+
+npm install   ติดตั้ง  package ที่ระบุ ในไฟล์  package.json
+
+npm start
+
+----------------------------------
+
+npm install --save express-validator
+
+npm install --save monk
+
+npm install express-messages
+    ไม่ต้องระบุตัวแปร local ในทุกๆหน้า 
+    เป็นการ สั่งให้ message แสดง class และ ข้อความ เก็บไว้ใน seesion
+    เป็นการเอา คำสั่ง message ไปวางไว้ เฉยๆ ถ้ามีข้อความ ก็จะแสดงออกมาเอง
+    ถ้า class ที่ระบุ ตรงกับ bootstrap ก็จะแสดงผลเอง หรือไม่งั้น ก็ต้อง เขียน script แต่งเติมเอา 
+    *จะเรียกใช้ connect-flash  อีกที 
+    *และ ใช้ express-session เพิ่ม เก็บ ข้อความข้าม page ด้วย
+
+npm install connect-flash
+สำหรับ แสดงผลในรูปแบบ flash
+
+
+npm install express-session
