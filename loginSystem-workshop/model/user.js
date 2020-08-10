@@ -3,7 +3,7 @@
  ********************************************************************* 
  */
 
-//  import database
+/* import database */
 var mongoose = require('mongoose');
 var mongoDB = "mongodb://localhost:27017/LoginDB";
 
@@ -12,6 +12,7 @@ mongoose.connect(mongoDB, {
     useNewUrlParser: true
 });
 
+// ระบุ path ที่จะ connect
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, "MongoDB Connection Error.")); // event error 
 
@@ -22,8 +23,8 @@ var userSchema = mongoose.Schema({
     password: { type: String }
 });
 
-var User = module.exports = mongoose.model('user', userSchema); // ไป import ที่ router
+var User = module.exports = mongoose.model('User', userSchema); // ไป import ที่ router
 
-module.exports.createUser = function(newUSer,callback){
-    newUSer.save(callback);
+module.exports.createUser = function(newUser,callback){
+    newUser.save(callback);
 }

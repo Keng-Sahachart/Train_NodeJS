@@ -25,9 +25,7 @@ router.post('/register', [
   // express-validation
   check('email', 'Please input your email.').isEmail(),
   check('name', 'pleas input your login name.').not().isEmpty(),
-  check('password', 'pleas input your password.').not().isEmpty(),
-  check('name', 'pleas input your login name more than 2 letter.').isLength({ min: 3 }),
-  check('password', 'pleas input your password more than 2 letter.').isLength({ min: 3 })
+  check('password', 'pleas input your password.').not().isEmpty()
 ], function (req, res, next) {
   // express-validation
   const result = validationResult(req);
@@ -37,25 +35,25 @@ router.post('/register', [
   // validate data
   if (!result.isEmpty()) {
     //return error to views
-    res.render('register', { errors: errors, title: 'register' }) // ส่งข้อมูล ออกไปพร้อมกับ render
+    res.render('register', { errors: errors }) // ส่งข้อมูล ออกไปพร้อมกับ render
   } else {
     // 
-    var name = req.body.name;
-    var password = req.body, password;
-    var email = req.body.email;
+    // var name = req.body.name;
+    // var password = req.body, password;
+    // var email = req.body.email;
 
-    //userSchema
-    var newUser = new User({
-      name: name,
-      password: password,
-      email: email
-    });
+    // //userSchema
+    // var newUser = new User({
+    //   name: name,
+    //   password: password,
+    //   email: email
+    // });
 
-    User.createUser(newUser, function (err,user) {
-      if (err) throw err
-    });
-    res.location('/');
-    res.redirect('/');
+    // User.createUser(newUser, function (err, user) {
+    //   if (err) throw err
+    // });
+    // res.location('/');
+    // res.redirect('/');
   }
 
   // res.render('register', { title: 'register doing' });
