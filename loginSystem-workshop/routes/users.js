@@ -38,22 +38,22 @@ router.post('/register', [
     res.render('register', { errors: errors }) // ส่งข้อมูล ออกไปพร้อมกับ render
   } else {
     // 
-    // var name = req.body.name;
-    // var password = req.body, password;
-    // var email = req.body.email;
+    var name = req.body.name;
+    var email = req.body.email;
+    var password = req.body.password;
 
-    // //userSchema
-    // var newUser = new User({
-    //   name: name,
-    //   password: password,
-    //   email: email
-    // });
+    //userSchema
+    var newUser = new User({
+      name: name,
+      password: password,
+      email: email
+    });
 
-    // User.createUser(newUser, function (err, user) {
-    //   if (err) throw err
-    // });
-    // res.location('/');
-    // res.redirect('/');
+    User.createUser(newUser, function (err, user) {
+      if (err) throw err
+    });
+    res.location('/');
+    res.redirect('/');
   }
 
   // res.render('register', { title: 'register doing' });
