@@ -25,6 +25,14 @@ var userSchema = mongoose.Schema({
 
 var User = module.exports = mongoose.model('User', userSchema); // ไป import ที่ router
 
+/**
+ * 
+ * @param {*} newUser mongoose.mo
+ * @param {*} callback 
+ */
 module.exports.createUser = function(newUser,callback){
+    /** ข้อสังเกตุ 
+     * function save จะมาจาก model schema
+     */
     newUser.save(callback);
 }
