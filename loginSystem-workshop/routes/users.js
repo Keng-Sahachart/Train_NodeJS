@@ -8,6 +8,10 @@ var User = require('../model/user'); // import model user
 const { check, validationResult } = require('express-validator');
 const { enable } = require('debug');
 
+// passport
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+
 /* GET users listing. */
 router.get('/', function (req, res, next) {
   res.send('respond with a resource');
@@ -19,6 +23,10 @@ router.get('/register', function (req, res, next) {
 
 router.get('/login', function (req, res, next) {
   res.render('login', { title: 'login' });
+});
+
+router.post('/login', function (req, res, next) {
+
 });
 
 router.post('/register', [

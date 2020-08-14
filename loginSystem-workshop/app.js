@@ -10,6 +10,10 @@ var mongo= require('mongodb');
 var mongoose = require('mongoose'); // library ODM Object Document mapping
 const db = mongoose.connection;
 
+// passport
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
@@ -24,6 +28,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// middle ware  สำหรับ passport *ต้องทำ
+app.use(passport.initialize());  // ตั้งค่าเริ่มต้น
+app.use(passport.session());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

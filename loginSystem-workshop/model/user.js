@@ -32,12 +32,12 @@ var User = module.exports = mongoose.model('User', userSchema); // ไป import
  * @param {*} newUser mongoose.model
  * @param {*} callback 
  */
-module.exports.createUser = function(newUser,callback){
+module.exports.createUser = function (newUser, callback) {
     /** ข้อสังเกตุ 
      * function save จะมาจาก model schema */
-   // newUser.save(callback);
+    // newUser.save(callback);
 
-   /** bcryptjs แบบ Sync */
+    /** bcryptjs แบบ Sync */
     // var salt = bcrypt.genSaltSync(10);
     // var hash = bcrypt.hashSync(newUser.password,salt);
     // var hashComp = bcrypt.compareSync(newUser.password,hash);
@@ -45,11 +45,24 @@ module.exports.createUser = function(newUser,callback){
     // newUser.save(callback);
 
     /** bcryptjs แบบ ASync */
-    bcrypt.genSalt(10, function(err, salt) {
-        bcrypt.hash(newUser.password, salt, function(err, hash) {
+    bcrypt.genSalt(10, function (err, salt) {
+        bcrypt.hash(newUser.password, salt, function (err, hash) {
             newUser.password = hash;
             newUser.save(callback);
             // Store hash in your password DB.
         });
     });
+}
+
+/**
+ * 
+ * @param {*} id 
+ * @param {*} callback 
+ */
+module.exports.getUserById = function (id, callback) {
+    User.findById(id, callback);
+}
+
+module.exports.getUserByName = (name, callback) => {
+    User.findOne({ name: name }, callback);
 }
