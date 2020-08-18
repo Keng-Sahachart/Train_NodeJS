@@ -25,9 +25,40 @@ router.get('/login', function (req, res, next) {
   res.render('login', { title: 'login' });
 });
 
-router.post('/login', function (req, res, next) {
-
+// ลงชื่อไม่สำเร็จ แสดงผลยังไง
+// redirect กรณีที่ error
+// ข้อความที่จะแสดงกลับไป// ลงชื่อเข้าใช้สำเร็จ ทำงานที่นี้
+router.post('/login', passport.authenticate('local', {
+  failureRedirect:'/users/login',
+  failureFlash:false
+}), function (req, res, next) {
+  res.redirect('/');
 });
+
+/**
+ * login success 
+ */
+passport.serializeUser(function (user, done) {
+  done(null, user.id);  //กรณี fail จะส่ง null เป็น session / success จะส่ง id มาเก็บ เป็น session
+});
+
+/**
+ * หลังจาก ได้ id แล้ว เอา id มา get ข้อมูล user อีกที
+ */
+passport.deserializeUser(function (id, done) {
+  User.getUserById(id, function (err, user) {
+    done(err, user);
+  })
+});
+
+passport.use(new LocalStrategy(function(name, password, done){
+  User.getUserByName(name, function (err, user) {
+    if (err) throw error
+    console.log(user);
+  })
+}));
+
+
 
 router.post('/register', [
   // express-validation
