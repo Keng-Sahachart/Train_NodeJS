@@ -8,6 +8,7 @@ var mongoose = require('mongoose');
 var mongoDB = "mongodb://localhost:27017/LoginDB";
 
 var bcrypt = require('bcryptjs');
+const passport = require('passport');
 
 //ระบุ path ที่จะ connect
 mongoose.connect(mongoDB, {
@@ -65,4 +66,10 @@ module.exports.getUserById = function (id, callback) {
 
 module.exports.getUserByName = (name, callback) => {
     User.findOne({ name: name }, callback);
+}
+
+module.exports.comparePassword = function (password, hash, callback) {
+    bcrypt.compare(passport, hash, function (err, isMatch) {
+        callback(null, isMatch);
+    });
 }

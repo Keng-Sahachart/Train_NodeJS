@@ -10,7 +10,7 @@ const { enable } = require('debug');
 
 // passport
 var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
+var LocalStrategy = require('passport-local').Strategy; // CLASS
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
@@ -29,8 +29,8 @@ router.get('/login', function (req, res, next) {
 // redirect กรณีที่ error
 // ข้อความที่จะแสดงกลับไป// ลงชื่อเข้าใช้สำเร็จ ทำงานที่นี้
 router.post('/login', passport.authenticate('local', {
-  failureRedirect:'/users/login',
-  failureFlash:false
+  failureRedirect: '/users/login',
+  failureFlash: false
 }), function (req, res, next) {
   res.redirect('/');
 });
@@ -51,9 +51,23 @@ passport.deserializeUser(function (id, done) {
   })
 });
 
-passport.use(new LocalStrategy(function(username, password, done){
+/**
+ * username,password คือ name จาก html และ บังคับต้องเป็น username เท่านั้น เพราะ LocalStrategy ต้อง destructuring จากชื่อนี้
+ * 
+ */
+passport.use(new LocalStrategy(function (username, password, done) {
   User.getUserByName(username, function (err, user) {
-    if (err) throw error
+    if (err) {
+      throw error
+    }
+    if (!user) { //ถ้า มี user อยู่
+      // ไม่พบ user
+      return done(null, false);
+    } else {
+      User.comparePassword(passport, user.password, function (err, isMatch) {
+        callback(null, isMatch);
+      });
+    }
     console.log(user);
   })
 }));
