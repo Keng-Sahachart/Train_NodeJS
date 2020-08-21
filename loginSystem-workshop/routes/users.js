@@ -57,19 +57,24 @@ passport.deserializeUser(function (id, done) {
  */
 passport.use(new LocalStrategy(function (username, password, done) {
   User.getUserByName(username, function (err, user) {
-    if (err) {
-      throw error
-    }
-    if (!user) { //ถ้า มี user อยู่
-      // ไม่พบ user
+    if (err) throw error
+
+    if (!user) {// ไม่พบ user
       return done(null, false);
-    } else {
+    } else { //ถ้า มี user อยู่
+      // return done(null, user);
       User.comparePassword(passport, user.password, function (err, isMatch) {
-        callback(null, isMatch);
+        if (err) throw error
+        if (isMatch) {
+          return done(null, user);
+        } else {
+          return done(null, false);
+        }
       });
     }
     console.log(user);
-  })
+
+  });
 }));
 
 
