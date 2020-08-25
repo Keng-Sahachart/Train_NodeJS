@@ -69,7 +69,7 @@ module.exports.getUserByName = (name, callback) => {
 }
 
 module.exports.comparePassword = function (password, hash, callback) {
-    bcrypt.compare(passport, hash, function (err, isMatch) {
+    bcrypt.compare(password, hash, function (err, isMatch) {
         callback(null, isMatch);
     });
 }

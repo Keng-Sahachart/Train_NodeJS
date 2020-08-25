@@ -36,7 +36,7 @@ router.post('/login', passport.authenticate('local', {
 });
 
 /**
- * login success 
+ * ทำเมื่อ login success 
  */
 passport.serializeUser(function (user, done) {
   done(null, user.id);  //กรณี fail จะส่ง null เป็น session / success จะส่ง id มาเก็บ เป็น session
@@ -60,24 +60,24 @@ passport.use(new LocalStrategy(function (username, password, done) {
     if (err) throw error
 
     if (!user) {// ไม่พบ user
+      console.log('Login user fail' , user);
       return done(null, false);
     } else { //ถ้า มี user อยู่
       // return done(null, user);
-      User.comparePassword(passport, user.password, function (err, isMatch) {
+      User.comparePassword(password, user.password, function (err, isMatch) {
         if (err) throw error
         if (isMatch) {
+          console.log('Login user:',user.name,' Complete =>' , user);
           return done(null, user);
         } else {
+          console.log('Login user:',user.name,' password fail =>' , user);
           return done(null, false);
         }
       });
     }
-    console.log(user);
-
+    console.log('Log ?' ,user);
   });
 }));
-
-
 
 router.post('/register', [
   // express-validation
@@ -89,7 +89,6 @@ router.post('/register', [
   const result = validationResult(req);
   var errors = result.errors;
   // console.log('errors =>');//,errors);
-
   // validate data
   if (!result.isEmpty()) {
     //return error to views

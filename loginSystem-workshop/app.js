@@ -3,7 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var bcrypt = require('bcryptjs');
+var bcrypt = require('bcryptjs'); // เข้ารหัส password
 
 //  import database
 var mongo= require('mongodb');

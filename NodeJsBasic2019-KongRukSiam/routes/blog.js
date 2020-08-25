@@ -36,7 +36,7 @@ router.post('/add', [
 
         console.log(result);
         console.log({ errors: errors });
-        res.render("blog_form", { errors: errors })
+        res.render("blog_form", { errors: errors }) // ส่งตัวแปร ไปให้หน้า blog_form แสดงผล
         //return res.status(400).json({ errors: errors.array() });
     } else {
         var collection = db.get('blogs');
