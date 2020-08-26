@@ -1,24 +1,36 @@
-
-
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-    <a href="/" class="navbar-brand">Login System</a>
-    <ul class="navbar-nav">
-        <ui class="nav-item">
-            <a href="/users/Register" class="nav-link">Register</a>
-        </ui>
-        <ui>
-            <a href="/users/login" class="nav-link">Login</a>
-        </ui>
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Dropdown link
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-          </li>
-    </ul>
-</nav>
+  <a href="/" class="navbar-brand">Login System</a>
+  <ul class="navbar-nav">
 
+    <% if(locals.user){ %>
+    <ui class="nav-item">
+      <a href="/users/Register" class="nav-link">Member</a>
+    </ui>
+    <ui>
+      <a href="/users/login" class="nav-link">Logout</a>
+    </ui>
+    <% } %>
+
+    <% if(!locals.user){ %>
+    <ui class="nav-item">
+      <a href="/users/Register" class="nav-link">Register</a>
+    </ui>
+    <ui>
+      <a href="/users/login" class="nav-link">Login</a>
+    </ui>
+    <% } %>
+
+    
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        Dropdown link
+      </a>
+      <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+        <a class="dropdown-item" href="#">Action</a>
+        <a class="dropdown-item" href="#">Another action</a>
+        <a class="dropdown-item" href="#">Something else here</a>
+      </div>
+    </li>
+  </ul>
+</nav>

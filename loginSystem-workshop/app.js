@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var bcrypt = require('bcryptjs'); // เข้ารหัส password
 
-//  import database
+// import database
 var mongo= require('mongodb');
 var mongoose = require('mongoose'); // library ODM Object Document mapping
 const db = mongoose.connection;
@@ -14,10 +14,19 @@ const db = mongoose.connection;
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
+var session = require('express-session')  // for login session and have to initial next
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+
+app.use(session({  // initial for express-session
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true//,
+  // cookie: { secure: true }
+}))
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -32,6 +41,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 // middle ware  สำหรับ passport *ต้องทำ
 app.use(passport.initialize());  // ตั้งค่าเริ่มต้น
 app.use(passport.session());
+
+app.get('*',function(req,res,next){ //statement นี้เรียกทุกครั้งที่มีการ call
+  res.locals.user = req.user || null;  // ถึงแม้จะมีการกำหนดค่าตรงนี้ แต่ถ้าไม่เปิด express-session ก็จะใช้งานไม่ได้
+  next();
+})
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

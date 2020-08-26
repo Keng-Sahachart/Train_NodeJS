@@ -31,8 +31,8 @@ router.get('/login', function (req, res, next) {
 router.post('/login', passport.authenticate('local', {
   failureRedirect: '/users/login',
   failureFlash: false
-}), function (req, res, next) {
-  res.redirect('/');
+}), function (req, res, next) {  
+  res.redirect('/');  // sucess login 
 });
 
 /**
@@ -78,6 +78,11 @@ passport.use(new LocalStrategy(function (username, password, done) {
     console.log('Log ?' ,user);
   });
 }));
+
+router.get('/logout',function(req,res){
+  req.logOut();
+  res.redirect('/');
+});
 
 router.post('/register', [
   // express-validation
