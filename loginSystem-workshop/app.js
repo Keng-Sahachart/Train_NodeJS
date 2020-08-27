@@ -28,6 +28,8 @@ app.use(session({  // initial for express-session
   // cookie: { secure: true }
 }))
 
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -42,6 +44,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize());  // ตั้งค่าเริ่มต้น
 app.use(passport.session());
 
+//  messages
+app.use(require('connect-flash')());
+app.use(function (req, res, next) {
+  res.locals.messages = require('express-messages')(req, res);
+  next();
+});
+
+// set global session var 
 app.get('*',function(req,res,next){ //statement นี้เรียกทุกครั้งที่มีการ call
   res.locals.user = req.user || null;  // ถึงแม้จะมีการกำหนดค่าตรงนี้ แต่ถ้าไม่เปิด express-session ก็จะใช้งานไม่ได้
   next();
