@@ -30,8 +30,10 @@ router.get('/login', function (req, res, next) {
 // ข้อความที่จะแสดงกลับไป// ลงชื่อเข้าใช้สำเร็จ ทำงานที่นี้
 router.post('/login', passport.authenticate('local', {
   failureRedirect: '/users/login',
-  failureFlash: true
+  failureFlash: true  // ถ้า login unsuccess ให้แสดง error result จาก passport ที่ <%- messages() %> 
 }), function (req, res, next) {  
+
+  req.flash("info", "Login Seccess Yeah!!.");
   res.redirect('/');  // sucess login 
 });
 
