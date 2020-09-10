@@ -9,6 +9,11 @@
 
 <body>
   Home Page
+  <% posts.forEach((post)=>{ %>
+  <h2> <%= posts.title %></h2>
+  <hr>
+  <% post.content %>
+  <% }) %>
 </body>
 
 </html>

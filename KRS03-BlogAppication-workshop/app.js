@@ -4,6 +4,11 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+/** database */
+var mongodb = require('mongodb');
+var db=require('monk')('localhost:27017');
+
+
 var indexRouter = require('./routes/index');
 // var usersRouter = require('./routes/users');
 

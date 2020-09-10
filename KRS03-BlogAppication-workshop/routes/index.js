@@ -10,7 +10,7 @@ router.get('/', function (req, res, next) {
 
   var blogs = db.get('posts');  // กำหนด table
   blogs.find({}, {},function(err, blog){    // เอาทุก row
-    res.render('index', { posts: 'blog' });   // ???????????????
+    res.render('index', { posts: blog });   // ตัวแปร blog ส่งกลับไป ตัวแปรเป็น posts
   });
 
 
