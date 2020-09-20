@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%=title%></title>
+</head>
+
+<body>
+    <%- include('layout'); %>
+    <div class="container">
+        <h2 align="center" class="my-4"> เพิ่ม ประเภทบทความ</h2>
+        <% if(locals.errors){ %>
+        <ul class="alert alert-danger">
+            <% Object.values(errors).forEach((errorItem)=>{ %>
+            <li><%=errorItem.msg;%></li>
+            <%}); %>
+        </ul>
+        <% }%>
+        <form action="/category/add" method="POST">
+            <div class="form-group">
+
+                <label for="">ชื่อประเภท</label>
+                <input type="text" class="form-control" name="name" placeholder="ชื่อประเภท">
+            </div>
+            <input type="submit" value="บันทึกข้อมูล" class="btn btn-primary">
+
+        </form>
+    </div>
+</body>
+
+</html>

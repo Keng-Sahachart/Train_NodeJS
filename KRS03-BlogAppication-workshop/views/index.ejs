@@ -4,16 +4,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>page <%=title %></title>
 </head>
 
+
 <body>
-  Home Page
+  
+  <%- include('layout'); -%>
+  <div class="container">
   <% posts.forEach((post)=>{ %>
-  <h2> <%= posts.title %></h2>
-  <hr>
-  <% post.content %>
+    <h2> <%=post.title %></h2>
+    <img src="<%=post.img%>" title='alt of <%= post.title %>' height="200" width="200">
+    <hr>
+    <%=post.content %>
   <% }) %>
+</div>
 </body>
 
 </html>
