@@ -29,7 +29,20 @@ router.post('/category/add',[
   if(!result.isEmpty()){
     res.render('addcategory',{title: 'Page Add Category complete! : error',errors:errors})
   }else{
-    res.render('addcategory',{title: 'Page Add Category complete!'});
+    // บันทึก
+    var category = db.get('categories');  // กำหนด table ใน database 
+    console.log(req.body.name);
+    category.insert({
+      name:req.body.name
+    },function(err,success){
+      if(err){
+        res.send(err);
+      }else{
+        res.location('/');   // redirecไปที่หน้า แรก
+        res.redirect('/');
+      }
+    });
+    // res.render('addcategory',{title: 'Page Add Category complete!'});
   }
 });
 
