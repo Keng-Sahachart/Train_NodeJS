@@ -9,16 +9,76 @@
 
 
 <body>
-  
+
   <%- include('layout'); -%>
+
+
+  <!-- Page Content -->
   <div class="container">
-  <% posts.forEach((post)=>{ %>
-    <h2> <%=post.title %></h2>
-    <img src="<%=post.img%>" title='alt of <%= post.title %>' height="200" width="200">
-    <hr>
-    <%=post.content %>
-  <% }) %>
-</div>
+
+    <div class="row">
+
+      <!-- Blog Entries Column -->
+      <div class="col-md-8">
+
+        <h1 class="my-4">บทความ</h1>
+
+        <!-- Blog Post -->
+        <div class="container">
+          <% posts.forEach((post)=>{ 
+            %>
+
+          <div class="card mb-4">
+            <img class="card-img-top" src="<%=post.img%>" alt="Card image cap" title='<%= post.title %>'>
+            <div class="card-body">
+              <h2 class="card-title"><%=post.title %></h2>
+              <p class="card-text">
+                <%=post.content %>
+              </p>
+              <a href="#" class="btn btn-primary">Read More &rarr;</a>
+            </div>
+            <div class="card-footer text-muted">
+              Posted on <%- post.date%>
+              <a href="#"><%- post.author %> </a> <%- post.category %>
+            </div>
+          </div>
+          <% }) %>
+        </div>
+
+
+
+
+
+        <!-- Pagination -->
+        <ul class="pagination justify-content-center mb-4">
+          <li class="page-item">
+            <a class="page-link" href="#">&larr; Older</a>
+          </li>
+          <li class="page-item disabled">
+            <a class="page-link" href="#">Newer &rarr;</a>
+          </li>
+        </ul>
+
+      </div>
+
+      <!-- Sidebar Widgets Column -->
+      <%- include('sideBar'); %>
+
+
+    </div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container -->
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Sahachart Panlawan</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
 </body>
 
 </html>
