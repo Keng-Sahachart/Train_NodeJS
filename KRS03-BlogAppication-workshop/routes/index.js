@@ -76,7 +76,7 @@ router.post('/blog/add', [
   let categories = db.get('categories');
   let posts = db.get('posts');
 
-  let categoryOut = await categories.find({}, {}
+  let categoryOut = categories.find({}, {}
     , function (err, categories) {
       console.log('Query categories Error ->', err);
     });
