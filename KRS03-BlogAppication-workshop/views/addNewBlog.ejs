@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %> </title>
+    <script src="https://cdn.ckeditor.com/4.15.0/standard/ckeditor.js"></script>
+</head>
+
+<body>
+
+    <%- include ('layout') %>
+    <div class="container">
+        <h2 align='center' class="my-4">เขียนบทความ</h2>
+
+        <% if(locals.errors){ %>
+        <ul class="alert alert-danger">
+            <% errors.forEach((error)=>{ %>
+            <li><%=error.msg%></li>
+            <% }); %>
+        </ul>
+        <% } %>
+
+
+        <form action="/blog/add" method="POST">
+            <div class="form-group">
+                <label for="">ชื่อบทความ</label>
+                <input class="form-control" type="text" name='title'>
+            </div>
+
+            <div class="form-group">
+                <label for="">ประเภทบทความ</label>
+                <select name="category" id="" class="form-control">
+                    <%  if(categories)
+                        categories.forEach((category)=>{ %>
+                    <option value="<%=category.name%>"><%=category.name%></option>
+                    <% }); %>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="">รูปปก</label>
+                <input type="url" class="form-control" name='img'>
+            </div>
+
+            <div class="form-group">
+                <label for="">เนื้อหา</label>
+                <textarea name="content"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="">ผู้เขียน</label>
+                <input type="text" class="form-control" name='author'>
+            </div>
+
+            <input type="submit" value="บันทึกบทความ" class='btn btn-primary'>
+
+        </form>
+
+    </div>
+
+    <script>
+        CKEDITOR.replace('content');
+    </script>
+</body>
+
+</html>
