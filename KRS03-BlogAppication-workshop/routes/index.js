@@ -19,6 +19,9 @@ router.get('/', function (req, res, next) {
   });
 });
 
+/***************************************************
+      Category  
+ ***************************************************/
 router.get('/category/add', function (req, res, next) {
   res.render('addcategory', { title: 'Page Add Category' });
 });
@@ -48,9 +51,63 @@ router.post('/category/add', [
   }
 });
 
+/***************************************************
+      Blog  
+ ***************************************************/
 router.get('/blog/add', function (req, res, next) {
-  res.render('addBlog', { title: 'Page Add Blog' });
+  const categories = db.get('categories');
+  categories.find({}, {}, (err, categories) => {
+    res.render('addNewBlog', {
+      title: 'Page Add new Blogs',
+      categories: categories
+    });
+  });
 });
 
+router.post('/blog/add', [
+  body('title', 'ชื่อบทความ ห้ามว่าง').not().isEmpty(),
+  body('img', 'รูปปก ห้ามว่าง').not().isEmpty(),
+  body('content', 'เนื้อหา ห้ามว่าง').not().isEmpty(),
+  body('author', 'ผู้เขียน ห้ามว่าง').not().isEmpty()
+], async function (req, res, next) {
+  const result = validationResult(req);
+  const errors = result.errors;
 
+  let categories = db.get('categories');
+  let posts = db.get('posts');
+
+  let categoryOut = categories.find({}, {}
+    , function (err, categories) {
+      console.log('Query categories Error ->', err);
+    });
+  console.log('Query categories OK ->', categoryOut);
+
+  if (!result.isEmpty()) {
+    res.render('addNewBlog', {
+      title: 'Page Add new Blogs : error',
+      errors: errors,
+      categories: categoryOut
+    });
+  } else {
+    // Insert record
+    posts.insert({
+      title: req.body.title,
+      content: req.body.content,
+      img: req.body.img,
+      author: req.body.author,
+      category: req.body.category,
+      date: new Date()
+    },(err,success)=>{
+      if (err) {
+        res.send(err);
+      } else {
+        res.location('/');
+        res.redirect('/');
+      }
+    });
+  }
+
+
+});
+/************************************************************************ */
 module.exports = router;
