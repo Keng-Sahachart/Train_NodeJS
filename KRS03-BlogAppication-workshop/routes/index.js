@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var moment = require('moment');
 
 /** database */
 var mongodb = require('mongodb');
@@ -14,7 +15,12 @@ router.get('/', function (req, res, next) {
   var categories = db.get('categories');
   blogs.find({}, {}, function (err, blog) {    // เอาทุก row
     categories.find({}, {}, function (err, category) {
-      res.render('index', { posts: blog, categories: category, title: 'Hey,this my Blog.' });   // ตัวแปร blog ส่งกลับไป ตัวแปรเป็น posts
+      res.render('index', {
+        posts: blog,
+        categories: category,
+        moment : moment ,
+        title: 'Hey,this my Blog.'
+      });   // ตัวแปร blog ส่งกลับไป ตัวแปรเป็น posts
     });
   });
 });
@@ -64,6 +70,10 @@ router.get('/blog/add', function (req, res, next) {
   });
 });
 
+router.get('/blog/viewBlog'),function(req,res,next){
+
+};
+
 router.post('/blog/add', [
   body('title', 'ชื่อบทความ ห้ามว่าง').not().isEmpty(),
   body('img', 'รูปปก ห้ามว่าง').not().isEmpty(),
@@ -97,7 +107,7 @@ router.post('/blog/add', [
       author: req.body.author,
       category: req.body.category,
       date: new Date()
-    },(err,success)=>{
+    }, (err, success) => {
       if (err) {
         res.send(err);
       } else {
