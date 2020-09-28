@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%=title%></title>
+    <script src="https://cdn.ckeditor.com/4.15.0/standard/ckeditor.js"></script>
+</head>
+
+<body>
+    <%- include('layout'); %>
+    <div class="container">
+        <h2 align="center" class="my-4"> เพิ่ม บทความ</h2>
+        <% if(locals.errors){ %>
+        <ul class="alert alert-danger">
+            <% Object.values(errors).forEach((errorItem)=>{ %>
+            <li><%=errorItem.msg;%></li>
+            <%}); %>
+        </ul>
+        <% }%>
+
+        <form action="/category/add" method="POST">
+            <div class="form-group">
+                <label for="">Title</label>
+                <input type="text" class="form-control" name="title" placeholder="ชื่อประเภท">
+            </div>
+            <div class="form-group">
+                <label for="">Content</label>
+                <textarea name="editor1"></textarea>
+                <!-- <input type="text" class="form-control" name="Content" placeholder="เนื้อหา"> -->
+            </div>
+            <div class="form-group">
+                <label for="">Image of Title</label>
+                <input type="text" class="form-control" name="img" placeholder="รูปสำหรับแสดงหน้า Blog">
+            </div>
+            <div class="form-group">
+                <label for="">author</label>
+                <input type="text" class="form-control" name="author" placeholder="ชื่อผู้เขียน">
+            </div>
+
+            <div class="form-group">
+                <label for="">category</label>
+                <input type="text" class="form-control" name="author" placeholder="ประเภทบทความ">
+            </div>
+            <input type="hidden" name="date" />
+
+            <div class="form-group">
+                <input type="submit" value="บันทึกข้อมูล" class="btn btn-primary">
+            </div>
+        </form>
+    </div>
+</body>
+
+<script>
+    CKEDITOR.replace('editor1');
+</script>
+
+</html>

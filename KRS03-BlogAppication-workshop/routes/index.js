@@ -29,7 +29,7 @@ router.post('/category/add', [
   const result = validationResult(req);
   const errors = result.errors;
   if (!result.isEmpty()) {
-    res.render('addcategory', { title: 'Page Add Category complete! : error', errors: errors })
+    res.render('addCategory', { title: 'Page Add Category complete! : error', errors: errors })
   } else {
     // บันทึก
     var category = db.get('categories');  // กำหนด table ใน database 
@@ -46,6 +46,10 @@ router.post('/category/add', [
     });
     // res.render('addcategory',{title: 'Page Add Category complete!'});
   }
+});
+
+router.get('/blog/add', function (req, res, next) {
+  res.render('addBlog', { title: 'Page Add Blog' });
 });
 
 

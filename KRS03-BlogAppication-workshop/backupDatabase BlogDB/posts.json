@@ -7,12 +7,7 @@
   "img": "https://cdn.pixabay.com/photo/2020/05/13/17/38/foliage-5168308_960_720.jpg",
   "author": "keng",
   "category": "ท่องเที่ยว",
-  "date": {
-    "$timestamp": {
-      "t": 0,
-      "i": 0
-    }
-  }
+  "date": "6867300725144158209"
 },{
   "_id": {
     "$oid": "5f64cb6682fc654e4d2805a8"
