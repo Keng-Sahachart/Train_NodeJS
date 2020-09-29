@@ -70,26 +70,27 @@ router.get('/blog/add', function (req, res, next) {
   });
 });
 
-router.get('/show/:id', function (req, res, next) {
+router.get('/show/:id',async function (req, res, next) {
   let categories = db.get('categories');
   let posts = db.get('posts');
 
-  let categoryOut =  categories.find({}, {}
+  let categoryOut = await categories.find({}, {}
     , function (err, categories) {
       console.log('Query categories Error ->', err);
     });
 
-  let postOut =  posts.find(req.params.id, {}
+  let postOut = await posts.find({ _id: req.params.id }, {}
     , function (err, post) {
       console.log('Query categories Error ->', err);
     });
 
-  // res.render('showBlog', {
-  //   title: 'Page Show Blog ',
-  //   categories: categoryOut,
-  //   post: postOut,
-  //   moment: moment
-  // });
+  console.log(postOut);
+  res.render('showBlog', {
+    title: 'Page Show Blog ',
+    categories: categoryOut,
+    post: postOut,
+    moment: moment
+  });
 
 });
 
