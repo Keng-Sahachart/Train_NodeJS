@@ -18,7 +18,7 @@ router.get('/', function (req, res, next) {
       res.render('index', {
         posts: blog,
         categories: category,
-        moment : moment ,
+        moment: moment,
         title: 'Hey,this my Blog.'
       });   // ตัวแปร blog ส่งกลับไป ตัวแปรเป็น posts
     });
@@ -70,9 +70,28 @@ router.get('/blog/add', function (req, res, next) {
   });
 });
 
-router.get('/blog/viewBlog'),function(req,res,next){
+router.get('/show/:id', function (req, res, next) {
+  let categories = db.get('categories');
+  let posts = db.get('posts');
 
-};
+  let categoryOut =  categories.find({}, {}
+    , function (err, categories) {
+      console.log('Query categories Error ->', err);
+    });
+
+  let postOut =  posts.find(req.params.id, {}
+    , function (err, post) {
+      console.log('Query categories Error ->', err);
+    });
+
+  // res.render('showBlog', {
+  //   title: 'Page Show Blog ',
+  //   categories: categoryOut,
+  //   post: postOut,
+  //   moment: moment
+  // });
+
+});
 
 router.post('/blog/add', [
   body('title', 'ชื่อบทความ ห้ามว่าง').not().isEmpty(),

@@ -14,10 +14,11 @@ var indexRouter = require('./routes/index');
 
 var app = express();
 
-// var port = process.env.PORT || 8080;
-// app.listen(port, function () {
-//   console.log('Example app listening on port ' + port + '!');
-// });
+// Assign port
+var port = process.env.PORT || 8080;
+app.listen(port, function () {
+  console.log('Example app listening on port ' + port + '!');
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
