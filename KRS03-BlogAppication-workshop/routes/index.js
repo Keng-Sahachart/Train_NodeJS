@@ -70,7 +70,7 @@ router.get('/blog/add', function (req, res, next) {
   });
 });
 
-router.get('/show/:id',async function (req, res, next) {
+router.get('/show/:id', async function (req, res, next) {
   let categories = db.get('categories');
   let posts = db.get('posts');
 
@@ -79,7 +79,7 @@ router.get('/show/:id',async function (req, res, next) {
       console.log('Query categories Error ->', err);
     });
 
-  let postOut = await posts.find({ _id: req.params.id }, {}
+  let postOut = await posts.findOne({ _id: req.params.id }, {}
     , function (err, post) {
       console.log('Query categories Error ->', err);
     });
