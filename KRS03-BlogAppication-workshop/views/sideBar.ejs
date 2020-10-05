@@ -23,7 +23,7 @@
                         
                         <% categories.forEach((category)=>{ %>
                         <li>
-                            <a href="#"><%=category.name%></a>
+                            <a href="/post/show/?category=<%=category.name%>"><%=category.name%></a>
                         </li>
                         <% }); %>
              

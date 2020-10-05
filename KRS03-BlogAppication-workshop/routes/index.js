@@ -139,5 +139,34 @@ router.post('/blog/add', [
 
 
 });
+
+
+router.get('/post/show', async function (req, res, next) {
+  let categories = db.get('categories');
+  let posts = db.get('posts');
+  let catName = req.query.category;   // เอา queryString จาก url
+
+  let categoryOut = await categories.find({}, {}
+    , function (err, categories) {
+      console.log('Query categories Error ->', err);
+    });
+
+  let blogs = await posts.find({ category: catName }, {}
+    , function (err, post) {
+      console.log('Query categories Error ->', err);
+    });
+
+  console.log(posts);
+  res.render('show_search', {
+    title: 'Page Show Blog ',
+    categories: categoryOut,
+    posts: blogs,
+    moment: moment,
+    search: catName
+  });
+
+});
+
+
 /************************************************************************ */
 module.exports = router;
