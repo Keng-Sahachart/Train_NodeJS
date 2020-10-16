@@ -140,18 +140,30 @@ router.post('/blog/add', [
 
 });
 
-
+/*
+async  await เพื่อ แยก line ให้อ่านง่าย
+*/
 router.get('/post/show', async function (req, res, next) {
   let categories = db.get('categories');
   let posts = db.get('posts');
   let catName = req.query.category;   // เอา queryString จาก url
+  let authorName = req.query.author;
+  let searchText = req.query.searchText;
 
+  console.log(searchText);
+  
   let categoryOut = await categories.find({}, {}
     , function (err, categories) {
       console.log('Query categories Error ->', err);
     });
 
-  let blogs = await posts.find({ category: catName }, {}
+  let blogs = await posts.find(
+    {
+      $or: [
+        { category: catName },
+        { author: authorName }
+      ]
+    }, {}
     , function (err, post) {
       console.log('Query categories Error ->', err);
     });

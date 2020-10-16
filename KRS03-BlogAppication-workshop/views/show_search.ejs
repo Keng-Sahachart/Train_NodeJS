@@ -44,12 +44,15 @@
             </div>
             <div class="card-footer text-muted">
               Posted on <%- moment(post.date).format('DD-MM-YYYY') %>
-              <a href="#"><%- post.author %> </a> - <a href="#"><%- post.category %></a>
+              <a href="/post/show/?author=<%=post.author%>"><%- post.author %> </a> - <a href="/post/show/?category=<%=post.category%>"><%- post.category %></a>
             </div>
           </div>
           <% }) %>
         </div>
         <%  } %>
+
+
+
         <!-- Pagination -->
         <ul class="pagination justify-content-center mb-4">
           <li class="page-item">
